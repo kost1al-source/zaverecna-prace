@@ -181,10 +181,15 @@
                         Otestujte své schopnosti na 4 reálných modelových situacích (školní systém Bakaláři, falešný Steam scam, dlužná faktura a soutěž o iPhone). Tento prototyp slouží jako praktické šetření pro kapitolu 8 a 9 mé závěrečné práce.
                     </p>
                 </div>
-                <button onclick="setTab('test')" class="shrink-0 px-5 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg flex items-center space-x-2">
-                    <span>Spustit test (4 otázky)</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
+                <div class="flex flex-wrap items-center gap-2 shrink-0">
+                    <button onclick="setTab('test')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs sm:text-sm transition-all border border-slate-700">
+                        Vyzkoušet na webu
+                    </button>
+                    <a href="https://kost1al-source.github.io/phishing-test/" target="_blank" class="px-4 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg flex items-center space-x-1.5">
+                        <span>Otevřít samostatný dotazník</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </a>
+                </div>
             </div>
 
             <!-- Dvousloupcový layout: Poslední aktualizace vs. Rychlý náhled textu -->
