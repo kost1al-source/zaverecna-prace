@@ -163,12 +163,13 @@ def build():
     add_heading('Seznam použitých zdrojů', level=1)
     
     sources = [
-        '[1] SOUČEK, Michal. Úvod do kybernetické bezpečnosti. Praha: Grada Publishing, 2021. 168 s. ISBN 978-80-271-2940-0. (Česká odborná kniha)',
-        '[2] NÚKIB (Národní úřad pro kybernetickou a informační bezpečnost). Zpráva o stavu kybernetické bezpečnosti České republiky za rok 2024. Brno: NÚKIB, 2025. Dostupné online z: https://nukib.gov.cz (Oficiální český zdroj)',
-        '[3] NÚKIB. Vzdělávací portál a metodika prevence sociálního inženýrství. Dostupné z: https://osveta.nukib.gov.cz',
-        '[4] ENISA (Agentura Evropské unie pro kybernetickou bezpečnost). ENISA Threat Landscape 2024/2025: Cyber Threat Analysis. Heraklion: ENISA, 2024. Dostupné z: https://www.enisa.europa.eu',
-        '[5] VERIZON. 2024–2025 Data Breach Investigations Report (DBIR). Verizon Business, 2025. Dostupné z: https://www.verizon.com/business/resources/reports/dbir/',
-        '[6] NIST (National Institute of Standards and Technology). Special Publication 800-83 Rev. 1: Guide to Malware Incident Prevention and Handling. Gaithersburg: NIST, 2020. Dostupné z: https://csrc.nist.gov'
+        '[1] KOLOUCH, Jan. CyberCrime. Praha: CZ.NIC, 2016. Edice CZ.NIC. 424 s. ISBN 978-80-88168-15-7. Dostupné také z: https://knihy.nic.cz (Česká odborná kniha o malware a phishingu)',
+        '[2] KOLOUCH, Jan, Pavel BAŠTA a kol. CyberSecurity. Praha: CZ.NIC, 2019. Edice CZ.NIC. 612 s. ISBN 978-80-88168-31-7. Dostupné také z: https://knihy.nic.cz (Odborná publikace o kybernetické bezpečnosti)',
+        '[3] NÚKIB (Národní úřad pro kybernetickou a informační bezpečnost). Zpráva o stavu kybernetické bezpečnosti České republiky za rok 2024. Brno: NÚKIB, 2025. Dostupné online z: https://nukib.gov.cz (Oficiální český vládní zdroj)',
+        '[4] NÚKIB. Vzdělávací portál a metodika prevence sociálního inženýrství. Dostupné z: https://osveta.nukib.gov.cz',
+        '[5] ENISA (Agentura Evropské unie pro kybernetickou bezpečnost). ENISA Threat Landscape 2024/2025: Cyber Threat Analysis. Heraklion: ENISA, 2024. Dostupné z: https://www.enisa.europa.eu',
+        '[6] VERIZON. 2024–2025 Data Breach Investigations Report (DBIR). Verizon Business, 2025. Dostupné z: https://www.verizon.com/business/resources/reports/dbir/',
+        '[7] NIST (National Institute of Standards and Technology). Special Publication 800-83 Rev. 1: Guide to Malware Incident Prevention and Handling. Gaithersburg: NIST, 2020. Dostupné z: https://csrc.nist.gov'
     ]
     for src in sources:
         add_p(src, space_after=8, align=WD_ALIGN_PARAGRAPH.LEFT, line_spacing=1.15)
