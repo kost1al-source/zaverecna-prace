@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Škodlivý software | Závěrečná práce - Babak Kostiantyn</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            DEFAULT: '#06b6d4',
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-white">
+
+    <!-- Horní navigační lišta -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 font-bold font-mono">
+                    🛡️
+                </div>
+                <div>
+                    <span class="font-bold tracking-tight text-white block text-sm sm:text-base">Škodlivý software</span>
+                    <span class="text-xs text-slate-400 hidden sm:block">Závěrečná práce • Babak Kostiantyn</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#o-projektu" class="hover:text-cyan-400 transition-colors">O práci</a>
+                <a href="#teorie" class="hover:text-cyan-400 transition-colors">Teorie (1. kapitola)</a>
+                <a href="#schema" class="hover:text-cyan-400 transition-colors">Model trojana</a>
+                <a href="#srovnani" class="hover:text-cyan-400 transition-colors">Druhy malware</a>
+                <a href="#statistiky" class="hover:text-cyan-400 transition-colors">Statistiky</a>
+                <a href="#ke-stazeni" class="hover:text-cyan-400 transition-colors">Ke stažení</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <a href="documents/Zaverecna_prace_Skodlivy_software_Babak.docx" download class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-xs sm:text-sm transition-all shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>Stáhnout .DOCX</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-20">
+        <!-- Hero sekce -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-center relative overflow-hidden">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-cyan-400 text-xs sm:text-sm font-medium mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>Školní rok 2026/2027 • ZŠ Husova Liberec</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight">
+                Škodlivý software: <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+                    Druhy, šíření, následky a ochrana
+                </span>
+            </h1>
+
+            <p class="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                Vzdělávací projekt a závěrečná práce 9. třídy zaměřená na kybernetickou bezpečnost, pochopení reálných principů škodlivého kódu a praktické zásady digitální sebeobrany pro běžného uživatele.
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="#teorie" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold text-sm sm:text-base transition-all shadow-lg glow-cyan flex items-center space-x-2">
+                    <span>Číst teorii (1. kapitola)</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+                <a href="#schema" class="px-6 py-3 rounded-xl glass-panel hover:bg-slate-800 text-white font-semibold text-sm sm:text-base transition-all border border-slate-700 flex items-center space-x-2">
+                    <span>Interaktivní model trojana</span>
+                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+
+            <!-- Rychlé informační odznaky -->
+            <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <div class="text-xs text-slate-400">Autor práce</div>
+                    <div class="text-sm sm:text-base font-bold text-white mt-1">Babak Kostiantyn</div>
+                    <div class="text-xs text-cyan-400 mt-0.5">9. třída ZŠ</div>
+                </div>
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <div class="text-xs text-slate-400">Aktuální fáze</div>
+                    <div class="text-sm sm:text-base font-bold text-emerald-400 mt-1">Říjnový úkol splněn</div>
+                    <div class="text-xs text-slate-400 mt-0.5">Teorie + Koncept praxe</div>
+                </div>
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <div class="text-xs text-slate-400">Jazykový styl</div>
+                    <div class="text-sm sm:text-base font-bold text-white mt-1">Čeština (úroveň B1)</div>
+                    <div class="text-xs text-slate-400 mt-0.5">Jasné a srozumitelné</div>
+                </div>
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <div class="text-xs text-slate-400">Bezpečnost obsahu</div>
+                    <div class="text-sm sm:text-base font-bold text-cyan-400 mt-1">100% Edukační</div>
+                    <div class="text-xs text-slate-400 mt-0.5">Pouze analýza bez virů</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekce O projektu a cíle -->
+        <section id="o-projektu" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-800/80">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-xs uppercase tracking-wider text-cyan-400 font-bold">Struktura & Vize</h2>
+                <h3 class="text-2xl sm:text-3xl font-bold text-white mt-2">Cíle závěrečné práce</h3>
+                <p class="text-slate-400 text-sm mt-3">Práce je rozdělena na teoretické pochopení hrozeb a praktickou modelovou analýzu podle oficiálních požadavků školy.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-cyan-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl mb-4">
+                        🎯
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Obecný cíl práce</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Srozumitelným jazykem vysvětlit, co přesně je škodlivý software, jaké jsou jeho hlavní podoby a proč je dnes kybernetická gramotnost nezbytná pro každého žáka i dospělého.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                        📚
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Cíl teoretické části</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Popsat rozdíl mezi virem a malwarem, analyzovat základní kategorie hrozeb (červ, trojan, ransomware, spyware) a shrnout nejčastější cesty, kudy se infekce dostává do systému.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-purple-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-xl mb-4">
+                        🔬
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Cíl praktické části</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Sestavit bezpečnou modelovou architekturu trojského koně v 5 fázích, vytvořit srovnávací matici rizik a vyhodnotit reálná statistická data z mezinárodních reportů ENISA a Verizon.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekce Teorie (1. kapitola) -->
+        <section id="teorie" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-800/80">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-3">
+                <span>Teoretická část • Říjnová odevzdaná kapitola</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">1. Co je malware</h2>
+            <p class="text-slate-400 text-sm mt-2">Kompletní znění první kapitoly vypracované pro školní odevzdání.</p>
+
+            <div class="mt-8 space-y-8 text-slate-300 leading-relaxed text-base">
+                <!-- Podkapitola 1.1 -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800">
+                    <h3 class="text-xl font-bold text-white flex items-center space-x-2 mb-3">
+                        <span class="text-cyan-400 font-mono">1.1</span>
+                        <span>Původ pojmu a definice</span>
+                    </h3>
+                    <p>
+                        Slovo <strong>malware</strong> vzniklo spojením dvou anglických slov: <span class="text-cyan-300 font-mono bg-slate-900/60 px-2 py-0.5 rounded">„malicious“</span> (což znamená škodlivý nebo zlomyslný) a <span class="text-cyan-300 font-mono bg-slate-900/60 px-2 py-0.5 rounded">„software“</span> (programové vybavení počítače). V českém jazyce se pro tento pojem běžně používá označení <em>škodlivý software</em> nebo <em>škodlivý kód</em>.
+                    </p>
+                    <p class="mt-3">
+                        V odborné literatuře i mezinárodních bezpečnostních standardech (například podle amerického institutu <strong>NIST</strong>) je malware definován jako jakýkoliv program, skript nebo kód, který byl vytvořen se záměrem poškodit počítačový systém, narušit jeho běžný provoz, získat neoprávněný přístup k citlivým datům nebo tajně sledovat činnost uživatele bez jeho vědomí a souhlasu.
+                    </p>
+                </div>
+
+                <!-- Podkapitola 1.2 -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800">
+                    <h3 class="text-xl font-bold text-white flex items-center space-x-2 mb-3">
+                        <span class="text-cyan-400 font-mono">1.2</span>
+                        <span>Rozdíl mezi malwarem a počítačovým virem</span>
+                    </h3>
+                    <p>
+                        Mezi běžnými uživateli se velmi často stává, že jakýkoliv problém s počítačem nebo jakýkoliv škodlivý program označují slovem <em>„virus“</em>. Z technického hlediska je to však nepřesné a zavádějící.
+                    </p>
+                    <div class="my-4 p-4 rounded-xl bg-slate-900/80 border-l-4 border-cyan-400">
+                        <p class="text-sm text-slate-300">
+                            <strong>Důležité pravidlo:</strong> <span class="text-cyan-400">Malware</span> je souhrnný název pro všechny záškodnické programy. <span class="text-emerald-400">Počítačový virus</span> je pouze jeden konkrétní druh malware s velmi specifickou vlastností – schopností sebereplikace.
+                        </p>
+                    </div>
+                    <p>
+                        Skutečný <strong>počítačový virus</strong> funguje podobně jako biologický virus: potřebuje „hostitele“. To znamená, že se sám připojí k existujícímu spustitelnému souboru (např. <code>.exe</code>) nebo dokumentu. Když uživatel takový soubor spustí, virus se aktivuje, napadne další soubory na disku a šíří se dál.
+                    </p>
+                    <p class="mt-3">
+                        Mnoho moderních hrozeb se však chová úplně jinak. Například <strong>trojský kůň</strong> se sám nekopíruje, ale maskuje se za užitečnou aplikaci. <strong>Ransomware</strong> zašifruje uživatelská data a požaduje výkupné. Proto je správné a přesné používat obecný termín <strong>malware</strong>.
+                    </p>
+                </div>
+
+                <!-- Podkapitola 1.3 -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800">
+                    <h3 class="text-xl font-bold text-white flex items-center space-x-2 mb-3">
+                        <span class="text-cyan-400 font-mono">1.3</span>
+                        <span>Cíle a motivace útočníků</span>
+                    </h3>
+                    <p>
+                        V počátcích počítačové historie (v 80. a 90. letech 20. století) byly škodlivé programy často vytvářeny spíše jako demonstrace schopností programátora, experiment nebo žert. Často pouze zobrazily zprávu na monitoru nebo přehrály zvuk. Dnes je kyberzločin organizovaný byznys a útočníci mají jasné cíle:
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-3 mt-4 text-sm">
+                        <div class="p-3 rounded-lg bg-slate-900/70 border border-slate-800">
+                            <span class="text-emerald-400 font-bold block">💰 Finanční zisk</span>
+                            Krádež bankovních přihlašovacích údajů, vydírání výkupným (ransomware) nebo tajná těžba kryptoměn.
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-900/70 border border-slate-800">
+                            <span class="text-cyan-400 font-bold block">🔑 Krádež identity & dat</span>
+                            Zcizení hesel k e-mailům, sociálním sítím, herním účtům nebo citlivých osobních dokumentů.
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-900/70 border border-slate-800">
+                            <span class="text-purple-400 font-bold block">🤖 Tvorba botnetů</span>
+                            Zotročení počítače, který pak útočník na dálku používá k masivním DDoS útokům nebo rozesílání spamu.
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-900/70 border border-slate-800">
+                            <span class="text-red-400 font-bold block">👁️ Špionáž a odposlech</span>
+                            Sledování stisknutých kláves (keylogging), odposlech mikrofonu nebo snímání webové kamery.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podkapitola 1.4 -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800">
+                    <h3 class="text-xl font-bold text-white flex items-center space-x-2 mb-3">
+                        <span class="text-cyan-400 font-mono">1.4</span>
+                        <span>Význam pro běžného uživatele</span>
+                    </h3>
+                    <p>
+                        Častým omylem lidí je představa: <em>„Já pro hackery nejsem zajímavý, nemám na počítači žádná státní tajemství.“</em> Útočníci však v drtivé většině případů neútočí na konkrétního jednotlivce ručně, ale využívají automatické roboty a hromadné e-maily (phishing).
+                    </p>
+                    <p class="mt-3">
+                        I obyčejný školní počítač nebo chytrý telefon má pro útočníka obrovskou hodnotu – ať už pro zneužití výkonu, krádež kontaktů nebo jako odrazový můstek pro další útoky v síti. Základní bezpečnostní návyky jsou proto dnes stejně nutné jako zamykání vchodových dveří.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekce Praktická část: Modelová architektura trojského koně -->
+        <section id="schema" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-800/80">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-3">
+                    <span>Praktická část • Vzdělávací model bez škodlivého kódu</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Modelová architektura trojského koně</h2>
+                <p class="text-slate-400 text-sm mt-3">
+                    Interaktivní rozbor životního cyklu typického trojského koně v 5 fázích. Kliknutím na jednotlivé fáze zjistíte, jak útok probíhá a jak se v daném momentu účinně bránit.
+                </p>
+            </div>
+
+            <!-- Interaktivní kroky -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8" id="step-buttons">
+                <button onclick="selectStep(1)" id="btn-step-1" class="step-btn p-4 rounded-xl border border-cyan-500 bg-cyan-500/20 text-white font-semibold text-xs sm:text-sm text-left transition-all">
+                    <span class="block text-cyan-400 font-mono text-xs mb-1">01. Vstup</span>
+                    Návnada & maskování
+                </button>
+                <button onclick="selectStep(2)" id="btn-step-2" class="step-btn p-4 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 font-semibold text-xs sm:text-sm text-left hover:border-slate-700 transition-all">
+                    <span class="block text-slate-500 font-mono text-xs mb-1">02. Spuštění</span>
+                    Uživatelská aktivace
+                </button>
+                <button onclick="selectStep(3)" id="btn-step-3" class="step-btn p-4 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 font-semibold text-xs sm:text-sm text-left hover:border-slate-700 transition-all">
+                    <span class="block text-slate-500 font-mono text-xs mb-1">03. Spojení</span>
+                    Komunikace s C2
+                </button>
+                <button onclick="selectStep(4)" id="btn-step-4" class="step-btn p-4 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 font-semibold text-xs sm:text-sm text-left hover:border-slate-700 transition-all">
+                    <span class="block text-slate-500 font-mono text-xs mb-1">04. Činnost</span>
+                    Aktivace payloadu
+                </button>
+                <button onclick="selectStep(5)" id="btn-step-5" class="step-btn p-4 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 font-semibold text-xs sm:text-sm text-left hover:border-slate-700 transition-all">
+                    <span class="block text-slate-500 font-mono text-xs mb-1">05. Obrana</span>
+                    Detekce & záchyt
+                </button>
+            </div>
+
+            <!-- Dynamická karta detailu kroku -->
+            <div id="step-detail-card" class="p-6 sm:p-8 rounded-2xl glass-panel border border-slate-800 transition-all">
+                <!-- Obsah se vkládá přes JavaScript -->
+            </div>
+        </section>
+
+        <!-- Sekce Srovnání typů malware -->
+        <section id="srovnani" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-800/80">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold mb-3">
+                    <span>Komparativní analýza • Matice hrozeb</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Přehled a srovnání hlavních druhů malware</h2>
+                <p class="text-slate-400 text-sm mt-3">Každý druh škodlivého kódu má jiné chování, cíl i způsob šíření.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Karta 1: Trojský kůň -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-cyan-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl">🐴</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Vysoké riziko</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Trojský kůň (Trojan)</h3>
+                    <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                        Zamaskuje se za neškodný nebo lákavý soubor (crack ke hře, faktura, aktualizace). Uživatel ho sám stáhne a spustí.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-xs space-y-1.5">
+                        <div class="text-slate-400"><strong>Šíření:</strong> Sociální inženýrství, podvodné weby</div>
+                        <div class="text-slate-400"><strong>Cíl:</strong> Vytvoření zadních vrátek (backdoor), krádež hesel</div>
+                    </div>
+                </div>
+
+                <!-- Karta 2: Ransomware -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-red-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl">🔒</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-500/10 text-red-400 border border-red-500/20">Kritické riziko</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Ransomware (Vyděračský kód)</h3>
+                    <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                        Po spuštění v tichosti zašifruje cenné soubory (fotky, dokumenty) a zobrazí výzvu k zaplacení výkupného v kryptoměně.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-xs space-y-1.5">
+                        <div class="text-slate-400"><strong>Šíření:</strong> E-mailové přílohy, zranitelnosti v RDP</div>
+                        <div class="text-slate-400"><strong>Cíl:</strong> Finanční vydírání uživatele nebo firmy</div>
+                    </div>
+                </div>
+
+                <!-- Karta 3: Počítačový červ -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-purple-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl">🐛</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">Vysoké riziko</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Počítačový červ (Worm)</h3>
+                    <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                        Škodlivý program schopný automatického samostatného šíření po síti bez nutnosti zásahu uživatele, typicky přes bezpečnostní díry.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-xs space-y-1.5">
+                        <div class="text-slate-400"><strong>Šíření:</strong> Síťové zranitelnosti, otevřené porty</div>
+                        <div class="text-slate-400"><strong>Cíl:</strong> Zahlcení sítě, šíření dalšího malware</div>
+                    </div>
+                </div>
+
+                <!-- Karta 4: Spyware & Keylogger -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-blue-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl">🕵️</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Střední až vysoké</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Spyware & Keylogger</h3>
+                    <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                        Běží nepozorovaně na pozadí, zaznamenává stisky kláves, ukládá snímky obrazovky a odesílá data útočníkovi.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-xs space-y-1.5">
+                        <div class="text-slate-400"><strong>Šíření:</strong> Přibaleno k bezplatným programům (bundle)</div>
+                        <div class="text-slate-400"><strong>Cíl:</strong> Krádež hesel, zpráv a historie prohlížení</div>
+                    </div>
+                </div>
+
+                <!-- Karta 5: Adware -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-yellow-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl">📢</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Střední riziko</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Adware (Reklamní software)</h3>
+                    <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                        Nevyžádaně otevírá vyskakovací okna s reklamou, mění domovskou stránku prohlížeče a zpomaluje chod počítače.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-xs space-y-1.5">
+                        <div class="text-slate-400"><strong>Šíření:</strong> Falešné rozšíření prohlížeče, freeware</div>
+                        <div class="text-slate-400"><strong>Cíl:</strong> Zisk z klikání na reklamu (Pay-Per-Click)</div>
+                    </div>
+                </div>
+
+                <!-- Karta 6: Rootkit -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-emerald-500/50 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl">🕳️</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-500/10 text-red-400 border border-red-500/20">Kritické riziko</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Rootkit</h3>
+                    <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                        Maskovací nástroj s nejvyššími právy správce (jádro systému), který skrývá přítomnost jiného škodlivého kódu i před antivirem.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-xs space-y-1.5">
+                        <div class="text-slate-400"><strong>Šíření:</strong> Zneužití zranitelností ovladačů</div>
+                        <div class="text-slate-400"><strong>Cíl:</strong> Dlouhodobá neviditelnost v systému</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekce Statistiky (Data ENISA & Verizon) -->
+        <section id="statistiky" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-800/80">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-3">
+                    <span>Praktická data • ENISA & Verizon DBIR</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Kudy malware proniká: Realita čísel</h2>
+                <p class="text-slate-400 text-sm mt-3">
+                    Statistické údaje potvrzují, že nejslabším článkem není technika, ale nepozornost člověka při manipulaci s e-maily a hesly.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 space-y-5">
+                    <h4 class="text-lg font-bold text-white mb-2">Hlavní vstupní cesty útoků (vektory)</h4>
+                    
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-1">
+                            <span class="text-cyan-400">Phishing & E-mailové podvody</span>
+                            <span class="text-white">44 %</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-cyan-500 to-cyan-400 h-3 rounded-full" style="width: 44%"></div>
+                        </div>
+                        <span class="text-[11px] text-slate-500">Uživatel sám otevře škodlivou přílohu nebo odkaz</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-1">
+                            <span class="text-emerald-400">Zneužití známých zranitelností</span>
+                            <span class="text-white">28 %</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-3 rounded-full" style="width: 28%"></div>
+                        </div>
+                        <span class="text-[11px] text-slate-500">Neaktualizovaný Windows, prohlížeč nebo aplikace</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-1">
+                            <span class="text-purple-400">Zcizená přihlašovací data (hesla)</span>
+                            <span class="text-white">19 %</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-purple-500 to-purple-400 h-3 rounded-full" style="width: 19%"></div>
+                        </div>
+                        <span class="text-[11px] text-slate-500">Slabá hesla a absence dvoufázového ověření (2FA)</span>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold mb-1">
+                            <span class="text-amber-400">Ostatní (USB disky, kompromitované weby)</span>
+                            <span class="text-white">9 %</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3">
+                            <div class="bg-gradient-to-r from-amber-500 to-amber-400 h-3 rounded-full" style="width: 9%"></div>
+                        </div>
+                        <span class="text-[11px] text-slate-500">Fyzická média a podvržené reklamy (malvertising)</span>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 space-y-4">
+                    <h4 class="text-lg font-bold text-white mb-2">Klíčová zjištění pro praxi</h4>
+                    <div class="flex space-x-3 items-start">
+                        <div class="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+                        <p class="text-sm text-slate-300">
+                            <strong>Lidský faktor rozhoduje:</strong> Téměř polovina všech úspěšných incidentů začíná sociálním inženýrstvím (podvodný e-mail tvářící se jako škola, banka nebo pošta).
+                        </p>
+                    </div>
+                    <div class="flex space-x-3 items-start">
+                        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+                        <p class="text-sm text-slate-300">
+                            <strong>Aktualizace zachraňují data:</strong> Pravidelná instalace bezpečnostních záplat systému eliminuje téměř třetinu běžných hrozeb.
+                        </p>
+                    </div>
+                    <div class="flex space-x-3 items-start">
+                        <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
+                        <p class="text-sm text-slate-300">
+                            <strong>Dvoufázové ověření (2FA):</strong> Zapnutí potvrzení přihlášení na mobilu zastaví drtivou většinu útoků zneužívajících uniklá hesla.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekce Ke stažení (Dokumenty pro školu) -->
+        <section id="ke-stazeni" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-800/80">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-3">
+                    <span>Školní podklady k odevzdání</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Dokumenty ke stažení</h2>
+                <p class="text-slate-400 text-sm mt-3">
+                    Kompletní soubory vypracované podle oficiální šablony školy ZŠ Husova Liberec pro říjnovou odevzdávku a 2. konzultaci.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <!-- Karta 1: Závěrečná práce DOCX -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col justify-between hover:border-cyan-500/50 transition-all">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-xl mb-4 font-mono">
+                            📄
+                        </div>
+                        <div class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-2">
+                            Oficiální odevzdávka za říjen
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Závěrečná práce (Word dokument)</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Obsahuje kompletní titulní stranu dle vzoru ZŠ Husova, prohlášení, poděkování, pracovní obsah, úvod, celou 1. kapitolu teorie, koncept praktické části a seznam zdrojů.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
+                        <span class="text-xs text-slate-500 font-mono">Formát: .DOCX • ~40 KB</span>
+                        <a href="documents/Zaverecna_prace_Skodlivy_software_Babak.docx" download class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all flex items-center space-x-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            <span>Stáhnout DOCX</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Karta 2: Návrh obsahu práce -->
+                <div class="p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition-all">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4 font-mono">
+                            📋
+                        </div>
+                        <div class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2">
+                            Původní schválená osnova
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Nástin obsahu – Škodlivý software</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Prvotní schválený plán kapitol práce, rozdělení tématické části a formulace cílů pro vedoucího práce.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
+                        <span class="text-xs text-slate-500 font-mono">Formát: .DOCX • ~39 KB</span>
+                        <a href="documents/Nastin_obsahu_Skodlivy_software.docx" download class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-all flex items-center space-x-1.5 border border-slate-700">
+                            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            <span>Stáhnout osnovu</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekce Zdroje -->
+        <section id="zdroje" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-800/80">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6">Seznam použitých zdrojů a citací</h2>
+            <div class="space-y-3 text-sm text-slate-400">
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <span class="text-cyan-400 font-mono font-bold mr-2">[1]</span>
+                    <strong class="text-slate-200">SOUČEK, Michal.</strong> <em>Úvod do kybernetické bezpečnosti.</em> Praha: Grada Publishing, 2021. ISBN 978-80-271-2940-0.
+                </div>
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <span class="text-cyan-400 font-mono font-bold mr-2">[2]</span>
+                    <strong class="text-slate-200">ENISA (Evropská agentura pro kybernetickou bezpečnost).</strong> <em>ENISA Threat Landscape 2024/2025.</em> Dostupné online z: <a href="https://www.enisa.europa.eu/publications/enisa-threat-landscape-2024" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">enisa.europa.eu</a>
+                </div>
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <span class="text-cyan-400 font-mono font-bold mr-2">[3]</span>
+                    <strong class="text-slate-200">VERIZON.</strong> <em>2024–2025 Data Breach Investigations Report (DBIR).</em> Dostupné online z: <a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">verizon.com/dbir</a>
+                </div>
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <span class="text-cyan-400 font-mono font-bold mr-2">[4]</span>
+                    <strong class="text-slate-200">NIST (National Institute of Standards and Technology).</strong> <em>Special Publication 800-83: Guide to Malware Incident Prevention and Handling for Desktops and Laptops.</em> Dostupné z: <a href="https://csrc.nist.gov" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">csrc.nist.gov</a>
+                </div>
+                <div class="p-4 rounded-xl glass-panel border border-slate-800">
+                    <span class="text-cyan-400 font-mono font-bold mr-2">[5]</span>
+                    <strong class="text-slate-200">NÚKIB (Národní úřad pro kybernetickou a informační bezpečnost).</strong> <em>Zpráva o stavu kybernetické bezpečnosti České republiky.</em> Dostupné online z: <a href="https://nukib.gov.cz" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">nukib.gov.cz</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Patička -->
+    <footer class="border-t border-slate-800 bg-slate-950/80 py-8 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p>Závěrečná práce 9. třídy • ZŠ s rozšířenou výukou jazyků, Husova 142/44, Liberec</p>
+            <p>Autor: <strong>Babak Kostiantyn</strong> • Školní rok 2026/2027</p>
+            <p class="text-slate-600">Vytvořeno v rámci přípravy na obhajobu závěrečných prací.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript pro interaktivitu modelu trojského koně -->
+    <script>
+        const stepData = {
+            1: {
+                title: "1. Vstupní fáze: Návnada a sociální inženýrství",
+                badge: "Riziko: Střední • Záchyt: Nejjednodušší",
+                badgeClass: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
+                description: "Trojský kůň se nedokáže sám šířit sítí jako červ. Potřebuje, aby ho uživatel do systému přinesl dobrovolně. K tomu útočníci používají maskování: škodlivý soubor vydávají za instalátor populární hry, film, fakturu v PDF s dvojitou příponou (.pdf.exe) nebo podvrženou aktualizaci prohlížeče.",
+                technicalDetail: "Vstupní soubor mívá upravenou ikonu známého programu a upravený název, aby oklamal operační systém a nezkušeného uživatele.",
+                defenseTip: "Zapněte v systému Windows zobrazování přípon souborů a nestahujte software z neoficiálních zdrojů, torrentů nebo podezřelých e-mailů."
+            },
+            2: {
+                title: "2. Spuštění uživatelem (Kritický bod zlomu)",
+                badge: "Riziko: Vysoké • Záchyt: Klíčový",
+                badgeClass: "bg-amber-500/10 text-amber-400 border border-amber-500/20",
+                description: "V tomto momentě uživatel na soubor dvakrát klikne. Operační systém často zobrazí varování (např. Windows SmartScreen nebo výzvu k udělení správcovských práv UAC). Pokud uživatel varování bezmyšlenkovitě potvrdí, škodlivý kód získá potřebná oprávnění k zápisu do systému.",
+                technicalDetail: "Při spuštění se trojan zkopíruje do skrytých systémových složek (např. AppData nebo Temp) a zapíše se do registru Windows pro automatické spouštění po startu počítače (Persistence).",
+                defenseTip: "Pokud systém hlásí neznámého vydavatele nebo program vyžaduje administrátorská práva, ačkoliv k tomu nemá důvod, okamžitě instalaci zrušte."
+            },
+            3: {
+                title: "3. Skrytá komunikace s řídicím serverem (C2)",
+                badge: "Riziko: Velmi vysoké",
+                badgeClass: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
+                description: "Po úspěšné instalaci do systému trojan odešle šifrovanou zprávu na vzdálený server útočníka (Command and Control - C2). Tím útočníkovi oznámí: 'Počítač byl infikován, čekám na příkazy.'",
+                technicalDetail: "Komunikace často probíhá přes standardní internetové porty 80 (HTTP) nebo 443 (HTTPS), aby splynula s běžným prohlížením webu a obešla základní firewall.",
+                defenseTip: "Kvalitní firewall a monitoring odchozího síťového provozu dokáže odhalit podezřelé pokusy o spojení na neznámé IP adresy a domény."
+            },
+            4: {
+                title: "4. Aktivace záškodnické funkce (Payload)",
+                badge: "Riziko: Kritické",
+                badgeClass: "bg-red-500/10 text-red-400 border border-red-500/20",
+                description: "Na pokyn z řídicího serveru se aktivuje samotná škodlivá funkce (tzv. payload). Může jít o stažení dalšího malware, sběr hesel z internetových prohlížečů, šifrování všech disků (ransomware) nebo tajné nahrávání obrazovky a stisků kláves.",
+                technicalDetail: "Útočník může počítač také začlenit do botnetu a na dálku ho využívat k provádění kybernetických útoků bez vědomí majitele.",
+                defenseTip: "Používejte dvoufázové ověření (2FA) – i kdyby trojan zcizil vaše heslo, bez potvrzovacího kódu z mobilu se útočník k účtu nedostane."
+            },
+            5: {
+                title: "5. Detekce a neutralizace (Obranná fáze)",
+                badge: "Záchrana dat & Odstranění",
+                badgeClass: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
+                description: "Moderní bezpečnostní programy využívají dva hlavní způsoby odhalení: signatury (kontrola podle známých otisků virů) a heuristiku (sledování podezřelého chování programu v reálném čase).",
+                technicalDetail: "Při záchytu je proces okamžitě ukončen, soubor přesunut do karantény a provedena oprava registrů. V závažných případech je nutná obnova systému ze zálohy.",
+                defenseTip: "Nejdůležitější je mít offline zálohu důležitých dat (např. na externím odpojeném disku). Žádný antivirus není stoprocentní."
+            }
+        };
+
+        function selectStep(stepNumber) {
+            // Aktualizace tlačítek
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`btn-step-${i}`);
+                if (i === stepNumber) {
+                    btn.className = "step-btn p-4 rounded-xl border border-cyan-500 bg-cyan-500/20 text-white font-semibold text-xs sm:text-sm text-left transition-all glow-cyan";
+                    btn.querySelector('span').className = "block text-cyan-400 font-mono text-xs mb-1";
+                } else {
+                    btn.className = "step-btn p-4 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 font-semibold text-xs sm:text-sm text-left hover:border-slate-700 transition-all";
+                    btn.querySelector('span').className = "block text-slate-500 font-mono text-xs mb-1";
+                }
+            }
+
+            // Aktualizace obsahu karty
+            const data = stepData[stepNumber];
+            const card = document.getElementById('step-detail-card');
+            card.innerHTML = `
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <h3 class="text-xl sm:text-2xl font-bold text-white">${data.title}</h3>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold ${data.badgeClass}">${data.badge}</span>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                    ${data.description}
+                </p>
+                <div class="grid sm:grid-cols-2 gap-4 pt-4 border-t border-slate-800/80">
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                        <div class="text-xs text-cyan-400 font-semibold mb-1 uppercase tracking-wider">Technický průběh</div>
+                        <div class="text-xs text-slate-300 leading-relaxed">${data.technicalDetail}</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/20">
+                        <div class="text-xs text-emerald-400 font-semibold mb-1 uppercase tracking-wider">Jak se bránit v této fázi</div>
+                        <div class="text-xs text-slate-300 leading-relaxed">${data.defenseTip}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Výchozí zobrazení prvního kroku
+        document.addEventListener('DOMContentLoaded', () => {
+            selectStep(1);
+        });
+    </script>
+</body>
+</html>
