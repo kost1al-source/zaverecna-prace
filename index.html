@@ -199,16 +199,16 @@
                         <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700 transition-all flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                             <div class="space-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">Praktická část</span>
-                                    <span class="text-xs text-slate-500 font-mono">Dnes</span>
+                                    <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">Vlastní šetření</span>
+                                    <span class="text-xs text-emerald-400 font-mono">Dle zpětné vazby učitele</span>
                                 </div>
-                                <h3 class="text-sm font-semibold text-white">Koncept praktické části: 4 pilíře pro vedoucího</h3>
+                                <h3 class="text-sm font-semibold text-white">Praktické šetření: Test rozpoznávání phishingu</h3>
                                 <p class="text-xs text-slate-400 leading-relaxed">
-                                    Definován bezpečný analytický model: srovnávací matice typů malware, 5 fází modelové architektury trojského koně, statistické zhodnocení (ENISA/Verizon) a interaktivní webová prezentace.
+                                    Přidáno vlastní terénní šetření mezi žáky 8. a 9. tříd (4 modelové zprávy: legitimní mail, zjevný spam, věrná kopie přihlašovací stránky, soubor s dvojitou příponou). Rozděleno na samostatné kapitoly Výsledky a Diskuze.
                                 </p>
                             </div>
-                            <button onclick="setTab('practice')" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700 transition-colors flex items-center space-x-1.5 self-start">
-                                <span>Zobrazit schéma</span>
+                            <button onclick="setTab('reader')" class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 border border-slate-700 transition-colors flex items-center space-x-1.5 self-start">
+                                <span>Přečíst v textu</span>
                                 <svg class="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -383,26 +383,34 @@
                 <!-- Strana 4: Koncept praktické části -->
                 <div class="paper-view p-8 sm:p-12 rounded-xl text-left space-y-4">
                     <div class="text-xs font-mono text-slate-500 uppercase tracking-wider">Strana 8-9 dokumentu</div>
-                    <h3 class="text-xl font-bold text-white border-b border-slate-800 pb-3">2. Koncept praktické části (návrh metodiky)</h3>
+                    <h3 class="text-xl font-bold text-white border-b border-slate-800 pb-3">2. Koncept praktické části (návrh metodiky a vlastního šetření)</h3>
                     <p class="text-sm text-slate-300 leading-relaxed">
-                        Pro splnění požadavků praktické části závěrečné práce byl zvolen analyticko-modelový postup. Praktická část nebude obsahovat tvorbu skutečného škodlivého programu, aby byl dodržen bezpečnostní a etický rámec školní práce. Místo toho bude praktická část postavena na čtyřech propojených pilířích:
+                        Na základě doporučení vedoucího práce je praktická část koncipována tak, aby přinesla vlastní originální zjištění a nebyla pouhým přepisem cizích statistik. Praktická část se skládá ze čtyř na sebe navazujících kroků:
                     </p>
                     <div class="space-y-3 text-sm text-slate-300">
-                        <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
-                            <strong class="text-white block mb-0.5">1. Komparativní analýza typů malware:</strong>
-                            Vytvoření přehledné srovnávací tabulky hlavních kategorií škodlivého kódu podle způsobu šíření, primárního cíle, úrovně rizika a možností záchytu.
+                        <div class="p-3.5 rounded-lg bg-slate-900 border border-slate-800">
+                            <strong class="text-white block mb-1">2.1 Vlastní šetření: Test rozpoznávání phishingových zpráv</strong>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Hlavním jádrem praktické části bude anonymní praktický test určený pro spolužáky z 8. a 9. tříd naší školy (cca 20–30 respondentů). Test bude obsahovat 4 konkrétní modelové zprávy: 1. Legitimní mail ze systému Bakaláři, 2. Nápadně podvodný e-mail se špatnou češtinou a slibem výhry, 3. Velmi zdařilý podvod napodobující herní platformu (Steam/Discord) s podvrženým odkazem, 4. Zpráva obsahující nebezpečnou přílohu. Úkolem žáků bude rozhodnout o bezpečnosti zpráv a označit podezřelé znaky.
+                            </p>
                         </div>
-                        <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
-                            <strong class="text-white block mb-0.5">2. Modelová architektura trojského koně:</strong>
-                            Detailní logické schéma životního cyklu v 5 fázích (vstupní soubor, spuštění, C2 komunikace, aktivace payloadu a body obrany).
+                        <div class="p-3.5 rounded-lg bg-slate-900 border border-slate-800">
+                            <strong class="text-white block mb-1">2.2 Zpracování výsledků (Samostatná kapitola Výsledky)</strong>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                V samostatné kapitole Výsledky budou odpovědi žáků statisticky zpracovány do přehledných tabulek a grafů. Zjišťovat se bude zejména celková úspěšnost odhalení podvodu a nejčastější chyby (která návnada byla pro spolužáky nejnebezpečnější).
+                            </p>
                         </div>
-                        <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
-                            <strong class="text-white block mb-0.5">3. Zpracování bezpečnostních statistik:</strong>
-                            Zpracování aktuálních dat ze zpráv ENISA Threat Landscape a Verizon DBIR o nejčastějších vektorech napadení.
+                        <div class="p-3.5 rounded-lg bg-slate-900 border border-slate-800">
+                            <strong class="text-white block mb-1">2.3 Diskuze a srovnání se světovými daty (Samostatná kapitola Diskuze)</strong>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Zjištěné výsledky žáků naší školy budou konfrontovány s mezinárodními zprávami ENISA a Verizon DBIR (např. údaj, že phishing tvoří 44 % všech úspěšných útoků). Tato diskuze zhodnotí zranitelnost teenagerů a navrhne praktická doporučení pro výuku.
+                            </p>
                         </div>
-                        <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
-                            <strong class="text-white block mb-0.5">4. Vzdělávací webová stránka projektu:</strong>
-                            Praktická implementace na GitHub Pages pro interaktivní prezentaci výsledků před školní komisí.
+                        <div class="p-3.5 rounded-lg bg-slate-900 border border-slate-800">
+                            <strong class="text-white block mb-1">2.4 Modelové schéma a prezentace na GitHub Pages</strong>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Praktickou část doplní bezpečné logické schéma životního cyklu trojského koně v 5 fázích a funkční webová prezentace projektu (https://kost1al-source.github.io/zaverecna-prace/).
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -412,11 +420,12 @@
                     <div class="text-xs font-mono text-slate-500 uppercase tracking-wider">Strana 10 dokumentu</div>
                     <h3 class="text-xl font-bold text-white border-b border-slate-800 pb-3">Seznam použitých zdrojů</h3>
                     <div class="space-y-2 text-xs sm:text-sm text-slate-300 font-mono">
-                        <p>[1] SOUČEK, Michal. Úvod do kybernetické bezpečnosti. Praha: Grada Publishing, 2021. ISBN 978-80-271-2940-0.</p>
-                        <p>[2] ENISA. ENISA Threat Landscape 2024/2025. Dostupné z: enisa.europa.eu</p>
-                        <p>[3] VERIZON. Data Breach Investigations Report (DBIR) 2024–2025. Dostupné z: verizon.com/dbir</p>
-                        <p>[4] NIST. Special Publication 800-83: Guide to Malware Incident Prevention. Dostupné z: csrc.nist.gov</p>
-                        <p>[5] NÚKIB. Zpráva o stavu kybernetické bezpečnosti České republiky. Dostupné z: nukib.gov.cz</p>
+                        <p>[1] SOUČEK, Michal. Úvod do kybernetické bezpečnosti. Praha: Grada Publishing, 2021. 168 s. ISBN 978-80-271-2940-0. (Česká odborná kniha)</p>
+                        <p>[2] NÚKIB (Národní úřad pro kybernetickou a informační bezpečnost). Zpráva o stavu kybernetické bezpečnosti České republiky za rok 2024. Brno: NÚKIB, 2025. Dostupné z: nukib.gov.cz</p>
+                        <p>[3] NÚKIB. Vzdělávací portál a metodika prevence sociálního inženýrství. Dostupné z: osveta.nukib.gov.cz</p>
+                        <p>[4] ENISA. ENISA Threat Landscape 2024/2025: Cyber Threat Analysis. Dostupné z: enisa.europa.eu</p>
+                        <p>[5] VERIZON. 2024–2025 Data Breach Investigations Report (DBIR). Dostupné z: verizon.com/dbir</p>
+                        <p>[6] NIST. Special Publication 800-83 Rev. 1: Guide to Malware Incident Prevention. Dostupné z: csrc.nist.gov</p>
                     </div>
                 </div>
             </div>

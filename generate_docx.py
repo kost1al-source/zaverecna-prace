@@ -65,17 +65,16 @@ def create_document():
     # 4. Obsah (strana 4)
     add_p('Obsah (pracovní podoba pro říjnovou odevzdávku)', WD_ALIGN_PARAGRAPH.LEFT, space_after=18, size=16, bold=True)
     add_p('Úvod ................................................................................................................................................ 5')
-    add_p('1. Co je malware ............................................................................................................................... 6')
+    add_p('1. Co je malware (teoretická část) ..................................................................................................... 6')
     add_p('   1.1 Původ pojmu a definice ........................................................................................................ 6')
     add_p('   1.2 Rozdíl mezi malwarem a počítačovým virem .......................................................................... 6')
     add_p('   1.3 Cíle škodlivého softwaru ....................................................................................................... 7')
     add_p('   1.4 Význam kybernetické bezpečnosti pro běžného uživatele .................................................... 7')
-    add_p('2. Koncept praktické části (metodika a plán) .................................................................................... 8')
-    add_p('   2.1 Cíl a zaměření praktické části ............................................................................................. 8')
-    add_p('   2.2 Komparativní analýza typů škodlivého kódu .......................................................................... 8')
-    add_p('   2.3 Bezpečná modelová architektura trojského koně .................................................................... 8')
-    add_p('   2.4 Zpracování a vyhodnocení bezpečnostních statistik ............................................................ 9')
-    add_p('   2.5 Interaktivní webová prezentace projektu (GitHub Pages) ..................................................... 9')
+    add_p('2. Koncept praktické části a metodika ............................................................................................. 8')
+    add_p('   2.1 Vlastní šetření: Test rozpoznávání phishingových zpráv u žáků ........................................... 8')
+    add_p('   2.2 Zpracování dat a samostatná kapitola Výsledky ................................................................. 8')
+    add_p('   2.3 Diskuze a srovnání zjištění se zprávami ENISA a Verizon ................................................... 9')
+    add_p('   2.4 Modelová architektura trojského koně a prezentace na GitHub Pages .............................. 9')
     add_p('Seznam použitých zdrojů ................................................................................................................... 10')
 
     doc.add_page_break()
@@ -84,7 +83,7 @@ def create_document():
     add_p('Úvod', WD_ALIGN_PARAGRAPH.LEFT, space_after=18, size=16, bold=True)
     add_p('Téma škodlivého softwaru bylo vybráno z důvodu jeho vysoké aktuálnosti v dnešní digitální době. Většina lidí denně používá počítače, chytré telefony a internet pro komunikaci, školní úkoly i online platby. Spolu s rostoucím využitím technologií se však neustále zvyšuje také počet kybernetických hrozeb, které mohou ohrozit osobní údaje, soukromí nebo finanční prostředky uživatelů.', space_after=12, line_spacing=1.25)
     add_p('Cílem této práce je srozumitelným způsobem vysvětlit, co je to malware, jaké jsou jeho hlavní typy a jaké techniky útočníci nejčastěji používají k jeho šíření. Práce se zaměřuje také na možnosti účinné prevence a ochrany běžného uživatele.', space_after=12, line_spacing=1.25)
-    add_p('Práce je rozdělena na teoretickou a praktickou část. V teoretické části budou podrobně popsány základní kategorie škodlivého softwaru, historie vybraných útoků a doporučená bezpečnostní pravidla. Praktická část se zaměří na vytvoření bezpečné modelové architektury trojského koně (formou logického schématu bez škodlivého kódu), porovnání vlastností jednotlivých hrozeb a vyhodnocení aktuálních statistik z uznávaných bezpečnostních reportů.', space_after=12, line_spacing=1.25)
+    add_p('Práce je rozdělena na teoretickou a praktickou část. V teoretické části budou podrobně popsány základní kategorie škodlivého softwaru a doporučená bezpečnostní pravidla. Praktická část přinese vlastní šetření mezi žáky školy zaměřené na schopnost rozpoznat podvodný phishingový e-mail, samostatné vyhodnocení výsledků a v diskuzi jejich porovnání se statistikami renomovaných agentur (ENISA, Verizon). Součástí je rovněž bezpečný model fungování trojského koně a interaktivní webová prezentace.', space_after=12, line_spacing=1.25)
 
     doc.add_page_break()
 
@@ -93,7 +92,7 @@ def create_document():
 
     add_p('1.1 Původ pojmu a definice', WD_ALIGN_PARAGRAPH.LEFT, space_after=12, size=14, bold=True)
     add_p('Slovo malware vzniklo spojením dvou anglických slov: „malicious“ (což znamená škodlivý nebo zlomyslný) a „software“ (programové vybavení počítače). V českém jazyce se pro tento pojem běžně používá označení škodlivý software nebo škodlivý kód.', space_after=12, line_spacing=1.25)
-    add_p('V odborné literatuře i mezinárodních bezpečnostních standardech (například podle amerického institutu NIST) je malware definován jako jakýkoliv program, skript nebo kód, který byl vytvořen se záměrem poškodit počítačový systém, narušit jeho běžný provoz, získat neoprávněný přístup k datům nebo sledovat činnost uživatele bez jeho vědomí a souhlasu.', space_after=12, line_spacing=1.25)
+    add_p('V odborné literatuře i mezinárodních bezpečnostních standardech (například podle amerického institutu NIST či českého NÚKIB) je malware definován jako jakýkoliv program, skript nebo kód, který byl vytvořen se záměrem poškodit počítačový systém, narušit jeho běžný provoz, získat neoprávněný přístup k datům nebo sledovat činnost uživatele bez jeho vědomí a souhlasu.', space_after=12, line_spacing=1.25)
 
     add_p('1.2 Rozdíl mezi malwarem a počítačovým virem', WD_ALIGN_PARAGRAPH.LEFT, space_after=12, size=14, bold=True)
     add_p('Mezi běžnými uživateli se velmi často stává, že jakýkoliv problém s počítačem nebo jakýkoliv podezřelý program označují slovem „virus“. Z technického hlediska je to však nepřesné.', space_after=12, line_spacing=1.25)
@@ -114,30 +113,31 @@ def create_document():
     doc.add_page_break()
 
     # 7. Koncept praktické části (strana 8-9)
-    add_p('2. Koncept praktické části (návrh metodiky)', WD_ALIGN_PARAGRAPH.LEFT, space_after=18, size=16, bold=True)
-    add_p('Pro splnění požadavků praktické části závěrečné práce byl zvolen analyticko-modelový postup. Praktická část nebude obsahovat tvorbu skutečného škodlivého programu, aby byl dodržen bezpečnostní a etický rámec školní práce. Místo toho bude praktická část postavena na čtyřech propojených pilířích:', space_after=12, line_spacing=1.25)
+    add_p('2. Koncept praktické části (návrh metodiky a vlastního šetření)', WD_ALIGN_PARAGRAPH.LEFT, space_after=18, size=16, bold=True)
+    add_p('Na základě doporučení vedoucího práce je praktická část koncipována tak, aby přinesla vlastní originální zjištění a nebyla pouhým přepisem cizích statistik. Praktická část se skládá ze čtyř na sebe navazujících kroků:', space_after=12, line_spacing=1.25)
 
-    add_p('2.1 Komparativní analýza typů malware (Srovnávací matice)', WD_ALIGN_PARAGRAPH.LEFT, space_after=6, size=13, bold=True)
-    add_p('Bude vytvořena přehledná srovnávací tabulka hlavních kategorií škodlivého softwaru (virus, červ, trojský kůň, ransomware, spyware, adware, rootkit). Každý typ bude porovnán podle předem daných kritérií: způsob šíření (sebereplikace vs. sociální inženýrství), primární cíl (ničení dat, výkupné, špehování), míra rizika pro běžného uživatele a nejúčinnější metoda detekce.', space_after=12, line_spacing=1.25)
+    add_p('2.1 Vlastní šetření: Test rozpoznávání phishingových zpráv', WD_ALIGN_PARAGRAPH.LEFT, space_after=6, size=13, bold=True)
+    add_p('Hlavním jádrem praktické části bude anonymní praktický test určený pro spolužáky z 8. a 9. tříd naší školy (cílová skupina cca 20–30 respondentů). Test nebude teoretický kvíz, ale bude obsahovat 4 konkrétní modelové ukázky e-mailů a zpráv: 1. Skutečný legitimní e-mail ze školního systému, 2. Nápadně podvodný e-mail se špatnou češtinou a slibem výhry, 3. Velmi zdařilý podvod napodobující banku nebo herní platformu (Steam/Discord) s podvrženým odkazem, 4. Zpráva obsahující nebezpečnou přílohu (falešná faktura). Úkolem žáků bude rozhodnout o bezpečnosti zpráv a označit podezřelé znaky.', space_after=12, line_spacing=1.25)
 
-    add_p('2.2 Bezpečná modelová architektura trojského koně', WD_ALIGN_PARAGRAPH.LEFT, space_after=6, size=13, bold=True)
-    add_p('Praktická část podrobně rozpracuje modelové logické schéma životního cyklu typického trojského koně v 5 fázích: 1. Návnada (vstupní soubor zamaskovaný za legitimní aplikaci), 2. Spuštění uživatelem, 3. Navázání skryté komunikace s řídicím serverem (C2), 4. Aktivace škodlivé funkce (payload), 5. Možnosti záchytu bezpečnostním softwarem v jednotlivých fázích. Schéma názorně ukáže, ve kterém bodě může uživatel útok včas zastavit.', space_after=12, line_spacing=1.25)
+    add_p('2.2 Zpracování výsledků (Samostatná kapitola Výsledky)', WD_ALIGN_PARAGRAPH.LEFT, space_after=6, size=13, bold=True)
+    add_p('V samostatné kapitole Výsledky budou odpovědi žáků statisticky zpracovány do přehledných tabulek a grafů. Zjišťovat se bude zejména úspěšnost odhalení podvodu, nejčastější chyby (na jaký typ návnady žáci nejčastěji naletí) a vliv věku či zájmu o technologie na úspěšnost řešení.', space_after=12, line_spacing=1.25)
 
-    add_p('2.3 Zpracování a vyhodnocení bezpečnostních statistik', WD_ALIGN_PARAGRAPH.LEFT, space_after=6, size=13, bold=True)
-    add_p('Z oficiálních a mezinárodně uznávaných zpráv o kybernetických hrozbách (zejména ENISA Threat Landscape a Verizon Data Breach Investigations Report) budou extrahována aktuální data. Ta budou zpracována do srozumitelných grafů – například zastoupení jednotlivých vektorů útoku (phishing, zranitelnosti systému, kompromitované přihlašovací údaje) a jejich trend v posledních letech.', space_after=12, line_spacing=1.25)
+    add_p('2.3 Diskuze a srovnání se světovými daty (Samostatná kapitola Diskuze)', WD_ALIGN_PARAGRAPH.LEFT, space_after=6, size=13, bold=True)
+    add_p('V kapitole Diskuze budou zjištěné výsledky žáků konfrontovány s reálnými údaji z reportů ENISA Threat Landscape a Verizon DBIR (např. údaj, že phishing stojí za 44 % všech úspěšných útoků). Tato diskuze zhodnotí zranitelnost teenagerů na internetu a navrhne konkrétní preventivní opatření pro školu.', space_after=12, line_spacing=1.25)
 
-    add_p('2.4 Vzdělávací webová stránka projektu (GitHub Pages)', WD_ALIGN_PARAGRAPH.LEFT, space_after=6, size=13, bold=True)
-    add_p('Jako praktický výstup a moderní formu prezentace práce autor vytvoří webovou stránku hostovanou na GitHub Pages. Web bude obsahovat interaktivní verzi schémat, možnost proklikávat jednotlivé fáze útoku, interaktivní srovnávač hrozeb a možnost stažení kompletní dokumentace pro učitele a hodnotící komisi.', space_after=18, line_spacing=1.25)
+    add_p('2.4 Modelové schéma trojského koně a prezentace na GitHub Pages', WD_ALIGN_PARAGRAPH.LEFT, space_after=6, size=13, bold=True)
+    add_p('Jako doprovodný technický výstup bude vytvořeno bezpečné modelové schéma životního cyklu trojského koně v 5 fázích a interaktivní webová prezentace na GitHub Pages (https://kost1al-source.github.io/zaverecna-prace/), kde budou shrnuty jak teoretické poznatky, tak výsledky šetření.', space_after=18, line_spacing=1.25)
 
     doc.add_page_break()
 
     # 8. Seznam zdrojů (strana 10)
     add_p('Seznam použitých zdrojů', WD_ALIGN_PARAGRAPH.LEFT, space_after=18, size=16, bold=True)
-    add_p('[1] SOUČEK, Michal. Úvod do kybernetické bezpečnosti. Praha: Grada Publishing, 2021. ISBN 978-80-271-2940-0.')
-    add_p('[2] ENISA (Evropská agentura pro kybernetickou bezpečnost). ENISA Threat Landscape 2024/2025. Dostupné online z: https://www.enisa.europa.eu/publications/enisa-threat-landscape-2024')
-    add_p('[3] VERIZON. 2024–2025 Data Breach Investigations Report (DBIR). Dostupné online z: https://www.verizon.com/business/resources/reports/dbir/')
-    add_p('[4] NIST (National Institute of Standards and Technology). Special Publication 800-83: Guide to Malware Incident Prevention and Handling for Desktops and Laptops. Dostupné z: https://csrc.nist.gov')
-    add_p('[5] NÚKIB (Národní úřad pro kybernetickou a informační bezpečnost). Zpráva o stavu kybernetické bezpečnosti České republiky. Dostupné online z: https://nukib.gov.cz')
+    add_p('[1] SOUČEK, Michal. Úvod do kybernetické bezpečnosti. Praha: Grada Publishing, 2021. 168 s. ISBN 978-80-271-2940-0. (Česká odborná kniha)')
+    add_p('[2] NÚKIB (Národní úřad pro kybernetickou a informační bezpečnost). Zpráva o stavu kybernetické bezpečnosti České republiky za rok 2024. Brno: NÚKIB, 2025. Dostupné online z: https://nukib.gov.cz')
+    add_p('[3] NÚKIB. Vzdělávací portál a metodika prevence sociálního inženýrství. Dostupné z: https://osveta.nukib.gov.cz')
+    add_p('[4] ENISA (Agentura Evropské unie pro kybernetickou bezpečnost). ENISA Threat Landscape 2024/2025: Cyber Threat Analysis. Heraklion: ENISA, 2024. Dostupné z: https://www.enisa.europa.eu')
+    add_p('[5] VERIZON. 2024–2025 Data Breach Investigations Report (DBIR). Verizon Business, 2025. Dostupné z: https://www.verizon.com/business/resources/reports/dbir/')
+    add_p('[6] NIST (National Institute of Standards and Technology). Special Publication 800-83 Rev. 1: Guide to Malware Incident Prevention and Handling. Gaithersburg: NIST, 2020. Dostupné z: https://csrc.nist.gov')
 
     output_path = 'documents/Zaverecna_prace_Skodlivy_software_Babak.docx'
     doc.save(output_path)
