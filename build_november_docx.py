@@ -33,22 +33,9 @@ def build_november():
     doc.paragraphs[14].text = 'Vedoucí závěrečné práce: pan učitel Konopa'
     doc.paragraphs[15].text = 'Školní rok 2026/2027'
 
-    # 2. Prohlášení
-    doc.paragraphs[35].text = 'Prohlášení:'
-    doc.paragraphs[36].text = 'Prohlašuji, že jsem závěrečnou práci vypracoval samostatně s použitím uvedené literatury a zdrojů informací a na základě konzultací s vedoucím práce.'
-    doc.paragraphs[37].text = 'V Liberci dne ...................................                                                            Podpis: ...................................'
-
-    # 3. Poděkování (přesně podle přání autora)
-    doc.paragraphs[38].text = 'Poděkování:'
-    thanks_text = (
-        'Rád bych touto cestou poděkoval panu učiteli Konopovi za odborné vedení, cenné rady a trpělivost při tvorbě této závěrečné práce.\n\n'
-        'Dále děkuji společnostem Anthropic, OpenAI a Google za vývoj pokročilých technologií, a zejména modelům umělé inteligence GPT-6 Astra, Claude 4 Sonnet, Gemini 3.8 Flash a Gemini 4 Argon za technickou podporu a konzultace při programování a rešerši informací.\n\n'
-        'V neposlední řadě patří mé upřímné poděkování energetickým nápojům Monster, které mi dodávaly potřebnou energii během dlouhých večerů strávených nad tímto projektem.'
-    )
-    doc.paragraphs[39].text = thanks_text
-
-    # Odstraníme zbývající prázdné odstavce šablony
-    while len(doc.paragraphs) > 40:
+    # Smažeme všechny odstavce za titulní stranou (od indexu 16 dále),
+    # abychom odstranili 19 prázdných řádků šablony a vytvořili čisté stránky s explicitními zlomy
+    while len(doc.paragraphs) > 16:
         p = doc.paragraphs[-1]._element
         p.getparent().remove(p)
 
@@ -93,7 +80,36 @@ def build_november():
             run.italic = True
         return p
 
-    # 4. Anotace a Klíčová slova (Povinná součást listopadového zadání)
+    # 2. STRANA 2: Prohlášení a Poděkování (přesně na samostatné 2. straně)
+    doc.add_page_break()
+    
+    add_heading('Prohlášení', level=2)
+    add_p(
+        'Prohlašuji, že jsem závěrečnou práci vypracoval samostatně s použitím uvedené literatury a zdrojů informací '
+        'a na základě konzultací s vedoucím práce.',
+        space_after=20
+    )
+    add_p('V Liberci dne ...................................                                                            Podpis: ...................................', space_after=40)
+
+    add_heading('Poděkování', level=2)
+    add_p(
+        'Rád bych touto cestou upřímně poděkoval panu učiteli Konopovi za odborné vedení, cenné rady a trpělivost '
+        'při tvorbě této závěrečné práce.',
+        space_after=10
+    )
+    add_p(
+        'Dále děkuji společnostem Anthropic, OpenAI a Google za vývoj pokročilých technologií, a zejména modelům umělé '
+        'inteligence GPT-6 Astra, Claude 4 Sonnet, Gemini 3.8 Flash a Gemini 4 Argon za technickou podporu a konzultace '
+        'při programování a rešerši informací.',
+        space_after=10
+    )
+    add_p(
+        'V neposlední řadě patří mé upřímné poděkování energetickým nápojům Monster, které mi dodávaly potřebnou energii '
+        'během dlouhých večerů strávených nad tímto projektem.',
+        space_after=12
+    )
+
+    # 3. STRANA 3: Anotace a Klíčová slova (ČJ + AJ + NJ)
     doc.add_page_break()
     add_heading('Anotace', level=1)
     add_p(
@@ -123,7 +139,7 @@ def build_november():
     add_heading('Schlüsselwörter', level=2)
     add_p('Schadsoftware, Malware, Computervirus, Trojanisches Pferd, Ransomware, Spyware, Social Engineering, Phishing, Cybersicherheit, Zwei-Faktor-Authentifizierung.')
 
-    # 5. Obsah práce
+    # 4. STRANA 4: Obsah práce
     doc.add_page_break()
     add_heading('Obsah', level=1)
 
@@ -177,7 +193,7 @@ def build_november():
         r2.font.size = Pt(11)
         r2.bold = True
 
-    # 6. Úvod
+    # 5. STRANA 5: Úvod
     doc.add_page_break()
     add_heading('Úvod', level=1)
     add_p(
@@ -202,7 +218,7 @@ def build_november():
         'před čtyři autentické modelové situace a jejich reakce tvoří základ pro statistické vyhodnocení zranitelnosti mladé generace.'
     )
 
-    # 7. Kapitola 1: Co je malware
+    # 6. Kapitola 1: Co je malware
     doc.add_page_break()
     add_heading('1. Co je malware', level=1)
 
@@ -234,7 +250,7 @@ def build_november():
 
     add_heading('1.3 Cíle škodlivého softwaru', level=2)
     add_p(
-        'Zatímco v raných dobách osobních počítačů (v 80. a 90. letech 20. století) vznikaly viry převážně jako experimenty programátorů, '
+        'Zatímco v raných dobách osobních počítačů (v 80. a 90. letech 20. století) byly škodlivé programy často vytvářeny spíše jako experiment, '
         'demonstrace technických schopností nebo neškodné žerty (zobrazující texty či animace na monitoru), dnešní kyberkriminalita má '
         'zcela pragmatické motivace [1]:'
     )
@@ -252,7 +268,7 @@ def build_november():
         'Digitální bezpečnost proto představuje základní životní dovednost každého uživatele 21. století [2].'
     )
 
-    # 8. Kapitola 2: Hlavní kategorie škodlivého softwaru (Nová část teorie)
+    # 7. Kapitola 2: Hlavní kategorie škodlivého softwaru
     doc.add_page_break()
     add_heading('2. Hlavní kategorie škodlivého softwaru', level=1)
     add_p(
@@ -271,7 +287,7 @@ def build_november():
         'Počítačový červ (worm) představuje ještě nebezpečnější evoluci. Červ ke svému šíření nepotřebuje hostitelský soubor '
         'ani asistenci uživatele. Je to samostatný program, který aktivně prohledává počítačovou síť, identifikuje zranitelná '
         'zařízení s nezabezpečenými porty či neaktualizovaným systémem a sám se na ně přes síť přenese a spustí. Historickým '
-        'milníkem byl například červ Morris z roku 1988, který vyřadil z provozu značnou část tehdejšího internetu, nebo '
+        'milníkem byl například červ Morris z roku 1988, který vyřadil z provozu značnou část tehdejšho internetu, nebo '
         'červ WannaCry z roku 2017, který zneužil chybu v protokolu SMB operačního systému Windows a způsobil miliardové škody [2].'
     )
 
@@ -326,7 +342,7 @@ def build_november():
         'Ačkoliv adware obvykle přímo neničí data, drasticky zpomaluje počítač a může sloužit jako brána pro instalaci závažnějšího malware.'
     )
 
-    # 9. Kapitola 3: Vektory šíření a sociální inženýrství (Nová část teorie)
+    # 8. Kapitola 3: Vektory šíření a sociální inženýrství
     doc.add_page_break()
     add_heading('3. Vektory šíření a sociální inženýrství', level=1)
     add_p(
@@ -376,13 +392,13 @@ def build_november():
     add_heading('3.5 Typosquatting a podvržené domény', level=2)
     add_p(
         'Typosquatting je metoda založená na drobných překlepech v internetových doménách. Útočníci si zaregistrují doménu, '
-        'která se liší pouze jedním písmenem od oficiální stránky – například misto „steamcommunity.com“ vytvoří '
+        'která se liší pouze jedním písmenem od oficiální stránky – například místo „steamcommunity.com“ vytvoří '
         '„steamcommurnity.com“ nebo zamění písmeno „l“ za číslici „1“. Vytvoří přesnou vizuální kopii přihlašovacího formuláře, '
         'kde nic netušící hráč zadá své jméno, heslo i kód ze Steam Guardu. Útočník tyto údaje okamžitě zachytí a během '
         'několika sekund zcizí herní účet i veškerý inventář skinů [2].'
     )
 
-    # 10. Kapitola 4: Prevence a účinná ochrana uživatele (Nová část teorie)
+    # 9. Kapitola 4: Prevence a účinná ochrana uživatele
     doc.add_page_break()
     add_heading('4. Prevence a účinná ochrana uživatele', level=1)
     add_p(
@@ -431,7 +447,7 @@ def build_november():
     add_p('• 2 různá média: data mít uložena na dvou odlišných technologiích (např. interní SSD disk a externí přenosný pevný disk USB).', space_after=3, align=WD_ALIGN_PARAGRAPH.LEFT)
     add_p('• 1 záloha mimo domov (off-site): alespoň jedna kopie musí být fyzicky umístěna jinde – například na šifrovaném cloudovém úložišti nebo u prarodičů. Pokud by došlo k požáru, krádeži nebo napadení celé domácí sítě ransomwarem, data zůstanou v bezpečí.', space_after=6, align=WD_ALIGN_PARAGRAPH.LEFT)
 
-    # 11. Kapitola 5: Metodika praktické části (Povinný odstavec z listopadového zadání)
+    # 10. Kapitola 5: Metodika praktické části
     doc.add_page_break()
     add_heading('5. Metodika praktické části', level=1)
     add_p(
@@ -460,7 +476,7 @@ def build_november():
     add_p('3. Scénář 3 – Výhrůžka smazáním účtu Steam (Typosquatting): velmi zdařilá napodobenina zprávy od Valve hrozící trvalým zablokováním účtu za podvádění ve hře CS2 s podvrženým odkazem steamcommurnity-login.com. Cílí na zcizení herního účtu.', space_after=4, align=WD_ALIGN_PARAGRAPH.LEFT)
     add_p('4. Scénář 4 – Zásilka České pošty s nebezpečnou přílohou (Trojský kůň): e-mail vyžadující doplacení cla s přiloženým souborem Faktura_Doplatek.pdf.exe. Testuje znalost maskování spustitelných souborů.', space_after=8, align=WD_ALIGN_PARAGRAPH.LEFT)
 
-    # 12. Kapitoly 6 a 7: Koncept dalších fází
+    # 11. Kapitoly 6 a 7: Koncept dalších fází
     doc.add_page_break()
     add_heading('6. Koncept vyhodnocení výsledků a modelová architektura', level=1)
     add_p(
@@ -477,7 +493,7 @@ def build_november():
         'doporučení pro školní výuku informatiky, jak žáky lépe připravit na nástrahy digitálního světa.'
     )
 
-    # 13. Závěr
+    # 12. Závěr
     doc.add_page_break()
     add_heading('Závěr', level=1)
     add_p(
@@ -487,7 +503,7 @@ def build_november():
         'funkční a připravený k distribuci žákům školy.'
     )
 
-    # 14. Seznam zdrojů
+    # 13. Seznam zdrojů
     doc.add_page_break()
     add_heading('Seznam použitých zdrojů', level=1)
 
@@ -510,7 +526,7 @@ def build_november():
     out_docs = 'documents/Zaverecna_prace_Skodlivy_software_Babak.docx'
     doc.save(out_root)
     doc.save(out_docs)
-    print(f'Done! Successfully built November version:\n- {out_root}\n- {out_docs}')
+    print(f'Done! Successfully built November version with clean page breaks:\n- {out_root}\n- {out_docs}')
 
 if __name__ == '__main__':
     build_november()
